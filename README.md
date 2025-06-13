@@ -1,7 +1,7 @@
 # 신입 개발자 면접 대비 CS 스터디 Cook-CS✨
 
 [![Since](https://img.shields.io/badge/since-2025.06.16-333333.svg?style=flat-square)](https://github.com/CS-CookStudy/cook-cs)
-![alt text](title_image.png)
+![alt text](images/title_image.png)
 
 CS 스터디 시작 (2025.06.16 ~ )
 
