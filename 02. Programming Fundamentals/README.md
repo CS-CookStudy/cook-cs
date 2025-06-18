@@ -62,7 +62,7 @@
       return 0;
   }
 ```
-
+---
 
 
 # 객체지향 프로그래밍
@@ -137,3 +137,140 @@
   person1.introduce()  # 출력: 안녕하세요, 저는 Alice이고, 30살입니다.
   person2.introduce()  # 출력: 안녕하세요, 저는 Bob이고, 25살입니다.
 ```
+
+- 클래스(Class)란?
+
+
+객체를 생성하기 위한 설계도(템플릿)로, 객체가 가져야할 속성과 기능 정의
+
+
+## SOLID (객체 지향 설계 원칙)
+- **S : 단일 책임 원칙** (SRP, Single Responsibility Principle)
+    - `하나의 클래스`는 오직 `하나의 책임만` 가져야 하며, 변경의 이유도 하나뿐이다.
+    - 여러 책임이 한 클래스에 섞여 있으면, 한 책임의 변경이 다른 책임의 코드에 영향을 줄 수 있음. 책임을 분리하면 응집도가 높아지고 결합도는 낮아져 유지보수가 쉬워짐.
+    - EX) Calculator 라는 클래스는 사칙연산만 한다. 계산기에 알람 모드가 있어도 이 클래스에 기능을 추가하지 않고 따로 관리해줘야 한다.
+
+- **O : 개방-폐쇠의 원칙** (OCP, Open Close Principle)
+    - 확장에는 열려 있어야 하고, 변경에는 닫혀 있어야 한다.
+    - 기존 코드에 기능을 추가하되, 기존 코드는 변경하지 않는 설계가 되어야 함.
+    - 여러 객체에서 사용하는 동일한 기능을 **인터페이스**에 정의하는 방법이 존재. 👉🏻 **캡슐화**
+    - <details>
+        <summary>OCP 예시 (Java)</summary>
+        <pre><code class="language-java">
+        // 동물의 공통 인터페이스
+        public interface Animal {
+            void cry();
+        }
+
+
+        // Dog 클래스
+        public class Dog implements Animal {
+            @Override
+            public void cry() {
+                System.out.println("멍멍");
+            }
+        }
+
+        // Cat 클래스
+        public class Cat implements Animal {
+            @Override
+            public void cry() {
+                System.out.println("야옹");
+            }
+        }
+
+        // 새로운 동물을 추가하고 싶다면, 예를 들어 Bird
+        public class Bird implements Animal {
+            @Override
+            public void cry() {
+                System.out.println("짹짹");
+            }
+        }
+
+        // 클라이언트 코드
+        public class Client {
+            public static void main(String[] args) {
+                Animal dog = new Dog();
+                Animal cat = new Cat();
+                Animal bird = new Bird(); // 새로 추가된 동물
+
+                dog.cry();  // 멍멍
+                cat.cry();  // 야옹
+                bird.cry(); // 짹짹
+          }
+        }
+        </code></pre>
+    </details>
+
+- **L : 리스코프 치환 원칙** (LSP, Liskov Subsitution Principle)
+    - 자식 클래스는 최소한 부모 클래스에서 가능한 행위를 수행할 수 있어야 하며, 부모 객체로 대체해도 시스템이 정상 동작 해야 한다.
+    - 자식 클래스는 부모 클래스의 책임을 무시하거나 재정의하지 않고, 확장만 수행한다. 오버라이드는 가급적 피한다.
+
+- **I : 인터페이스 분리 원칙** (ISP, Interface Segregation Principle)
+    - 자신이 사용하지 않을 인터페이스는 구현하지 않는다.
+    - 변경에 따른 위험도를 낮추기 위해 하나의 거대한 인터페이스보단 여러 개의 구체적인 인터페이스가 낫다.
+    - EX) 휴대폰 인터페이스에 전화, 문자, 알람, 계산 등 기능을 모두 넣지 말고, 각 기능별로 인터페이스를 분리하여 필요한 기능만 구현하도록 함.
+    - <details>
+        <summary>ISP 예시 (C++)</summary>
+        <pre><code class="language-cpp">
+          #include <iostream>
+          using namespace std;
+
+          // 각 기능별 인터페이스
+          struct ICall {
+              virtual void call() = 0;
+          };
+          struct IMessage {
+              virtual void message() = 0;
+          };
+
+          // 전화만 되는 폰
+          class BasicPhone : public ICall {
+          public:
+              void call() override {
+                  cout << "전화 걸기" << endl;
+              }
+          };
+
+          // 문자만 되는 폰
+          class MessagePhone : public IMessage {
+          public:
+              void message() override {
+                  cout << "문자 보내기" << endl;
+              }
+          };
+
+          // 전화와 문자 모두 되는 폰
+          class SmartPhone : public ICall, public IMessage {
+          public:
+              void call() override {
+                  cout << "스마트폰: 전화 걸기" << endl;
+              }
+              void message() override {
+                  cout << "스마트폰: 문자 보내기" << endl;
+              }
+          };
+
+          int main() {
+              BasicPhone bp;
+              bp.call();
+
+              MessagePhone mp;
+              mp.message();
+
+              SmartPhone sp;
+              sp.call();
+              sp.message();
+          }
+
+        </code></pre>
+    </details>
+
+- **D : 의존관계 역전 원칙** (DIP, Dependency Inversion Principle)
+    - 하위 클래스에서 구체화가 아닌, 상위 클래스 자체가 고수준의 모듈이 되어야 한다.
+    - 의존 관계는 변화하기 어렵거나 변화가 거의 없는 것과 맺어야 한다.
+
+---
+
+
+# 함수형 프로그래밍
