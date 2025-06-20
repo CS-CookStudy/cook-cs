@@ -56,7 +56,21 @@ int[][] jaggedArray = {{1, 2}, {3, 4, 5}, {6}}; // 가변 길이
 
 ## 2. 연결 리스트 (Linked List)
 
-### 단일 연결 리스트 (Singly Linked List)
+### 2-1. 단일 연결 리스트 (Singly Linked List)
+
+#### 개념
+
+- 각 노드가 **데이터**와 **다음 노드를 가리키는 포인터** 하나만 가지는 연결 리스트
+- 한 방향으로만 순회 가능 (head → tail)
+- 가장 기본적이고 단순한 연결 리스트 형태
+
+#### 특징
+
+- **단방향 순회**: head에서 시작해서 tail까지만 이동 가능
+- **메모리 효율성**: 포인터 하나만 저장하므로 메모리 사용량이 적음
+- **역방향 접근 불가**: 이전 노드로 돌아가려면 처음부터 다시 순회해야 함
+
+#### 구현
 
 ```java
 class ListNode {
@@ -71,9 +85,23 @@ class ListNode {
 
 class SinglyLinkedList {
     private ListNode head;
+    private int size;
 
-    // 삽입
-    public void insert(int data) {
+    public SinglyLinkedList() {
+        this.head = null;
+        this.size = 0;
+    }
+
+    // 맨 앞에 삽입
+    public void insertFirst(int data) {
+        ListNode newNode = new ListNode(data);
+        newNode.next = head;
+        head = newNode;
+        size++;
+    }
+
+    // 맨 뒤에 삽입
+    public void insertLast(int data) {
         ListNode newNode = new ListNode(data);
         if (head == null) {
             head = newNode;
@@ -84,14 +112,37 @@ class SinglyLinkedList {
             }
             current.next = newNode;
         }
+        size++;
     }
 
-    // 삭제
+    // 특정 위치에 삽입
+    public void insertAt(int index, int data) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        if (index == 0) {
+            insertFirst(data);
+            return;
+        }
+
+        ListNode newNode = new ListNode(data);
+        ListNode current = head;
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+        }
+        newNode.next = current.next;
+        current.next = newNode;
+        size++;
+    }
+
+    // 값으로 삭제
     public boolean delete(int data) {
         if (head == null) return false;
 
         if (head.data == data) {
             head = head.next;
+            size--;
             return true;
         }
 
@@ -102,9 +153,31 @@ class SinglyLinkedList {
 
         if (current.next != null) {
             current.next = current.next.next;
+            size--;
             return true;
         }
         return false;
+    }
+
+    // 인덱스로 삭제
+    public boolean deleteAt(int index) {
+        if (index < 0 || index >= size) {
+            return false;
+        }
+
+        if (index == 0) {
+            head = head.next;
+            size--;
+            return true;
+        }
+
+        ListNode current = head;
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+        }
+        current.next = current.next.next;
+        size--;
+        return true;
     }
 
     // 탐색
@@ -118,10 +191,71 @@ class SinglyLinkedList {
         }
         return null;
     }
+
+    // 특정 인덱스의 값 반환
+    public int get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        ListNode current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.data;
+    }
+
+    // 크기 반환
+    public int size() {
+        return size;
+    }
+
+    // 비어있는지 확인
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    // 출력
+    public void display() {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
 }
 ```
 
-### 이중 연결 리스트 (Doubly Linked List)
+#### 장단점
+
+**장점:**
+
+- 구현이 간단하고 직관적
+- 메모리 사용량이 적음
+- 삽입/삭제가 O(1) (위치를 알고 있을 때)
+
+**단점:**
+
+- 역방향 순회 불가능
+- 특정 노드 삭제 시 이전 노드를 찾기 위해 처음부터 순회 필요
+- 임의 위치 접근이 O(n)
+
+### 2-2. 이중 연결 리스트 (Doubly Linked List)
+
+#### 개념
+
+- 각 노드가 **데이터**, **다음 노드 포인터(next)**, **이전 노드 포인터(prev)** 를 가지는 연결 리스트
+- 양방향 순회 가능 (head ↔ tail)
+- 더 유연한 탐색과 조작이 가능
+
+#### 특징
+
+- **양방향 순회**: 앞뒤로 자유롭게 이동 가능
+- **효율적인 삭제**: 특정 노드 삭제 시 이전 노드 탐색 불필요
+- **head와 tail 포인터**: 양쪽 끝에서의 삽입/삭제가 효율적
+
+#### 구현
 
 ```java
 class DoublyListNode {
@@ -139,8 +273,30 @@ class DoublyListNode {
 class DoublyLinkedList {
     private DoublyListNode head;
     private DoublyListNode tail;
+    private int size;
 
-    public void insert(int data) {
+    public DoublyLinkedList() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    // 맨 앞에 삽입
+    public void insertFirst(int data) {
+        DoublyListNode newNode = new DoublyListNode(data);
+
+        if (head == null) {
+            head = tail = newNode;
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        }
+        size++;
+    }
+
+    // 맨 뒤에 삽입
+    public void insertLast(int data) {
         DoublyListNode newNode = new DoublyListNode(data);
 
         if (head == null) {
@@ -150,56 +306,404 @@ class DoublyLinkedList {
             newNode.prev = tail;
             tail = newNode;
         }
+        size++;
     }
 
+    // 특정 위치에 삽입
+    public void insertAt(int index, int data) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        if (index == 0) {
+            insertFirst(data);
+            return;
+        }
+        if (index == size) {
+            insertLast(data);
+            return;
+        }
+
+        DoublyListNode newNode = new DoublyListNode(data);
+        DoublyListNode current = getNodeAt(index);
+
+        newNode.next = current;
+        newNode.prev = current.prev;
+        current.prev.next = newNode;
+        current.prev = newNode;
+        size++;
+    }
+
+    // 값으로 삭제
     public boolean delete(int data) {
         DoublyListNode current = head;
 
         while (current != null) {
             if (current.data == data) {
-                if (current.prev != null) {
-                    current.prev.next = current.next;
-                } else {
-                    head = current.next;
-                }
-
-                if (current.next != null) {
-                    current.next.prev = current.prev;
-                } else {
-                    tail = current.prev;
-                }
+                deleteNode(current);
                 return true;
             }
             current = current.next;
         }
         return false;
     }
+
+    // 인덱스로 삭제
+    public boolean deleteAt(int index) {
+        if (index < 0 || index >= size) {
+            return false;
+        }
+
+        DoublyListNode nodeToDelete = getNodeAt(index);
+        deleteNode(nodeToDelete);
+        return true;
+    }
+
+    // 특정 노드 삭제 (내부 메서드)
+    private void deleteNode(DoublyListNode node) {
+        if (node.prev != null) {
+            node.prev.next = node.next;
+        } else {
+            head = node.next;
+        }
+
+        if (node.next != null) {
+            node.next.prev = node.prev;
+        } else {
+            tail = node.prev;
+        }
+
+        // 메모리 누수 방지
+        node.prev = null;
+        node.next = null;
+        size--;
+    }
+
+    // 특정 인덱스의 노드 반환 (내부 메서드)
+    private DoublyListNode getNodeAt(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        DoublyListNode current;
+
+        // 중간점을 기준으로 앞/뒤에서 탐색 시작 (최적화)
+        if (index < size / 2) {
+            current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+        } else {
+            current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+        }
+        return current;
+    }
+
+    // 특정 인덱스의 값 반환
+    public int get(int index) {
+        return getNodeAt(index).data;
+    }
+
+    // 탐색
+    public DoublyListNode search(int data) {
+        DoublyListNode current = head;
+        while (current != null) {
+            if (current.data == data) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
+    // 크기 반환
+    public int size() {
+        return size;
+    }
+
+    // 비어있는지 확인
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    // 정방향 출력
+    public void displayForward() {
+        DoublyListNode current = head;
+        while (current != null) {
+            System.out.print(current.data + " <-> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    // 역방향 출력
+    public void displayBackward() {
+        DoublyListNode current = tail;
+        while (current != null) {
+            System.out.print(current.data + " <-> ");
+            current = current.prev;
+        }
+        System.out.println("null");
+    }
 }
 ```
 
-### 원형 연결 리스트 (Circular Linked List)
+#### 장단점
+
+**장점:**
+
+- 양방향 순회 가능
+- 특정 노드 삭제가 효율적 (이전 노드 탐색 불필요)
+- 역순 정렬이나 역방향 작업에 유리
+- 양쪽 끝에서의 삽입/삭제가 O(1)
+
+**단점:**
+
+- 추가 메모리 필요 (prev 포인터)
+- 구현 복잡도 증가
+- 포인터 연결 관리가 복잡 (실수하기 쉬움)
+
+### 2-3. 원형 연결 리스트 (Circular Linked List)
+
+#### 개념
+
+- 마지막 노드가 첫 번째 노드를 가리켜서 **원형 구조**를 만드는 연결 리스트
+- 끝이 없는 순환 구조
+- 단일 원형과 이중 원형 두 가지 형태 존재
+
+#### 특징
+
+- **순환 구조**: 마지막 노드의 next가 head를 가리킴
+- **끝이 없음**: 계속해서 순회 가능
+- **시작점이 임의적**: 어느 노드에서든 시작 가능
+
+#### 구현
 
 ```java
 class CircularLinkedList {
     private ListNode head;
+    private int size;
 
-    public void insert(int data) {
+    public CircularLinkedList() {
+        this.head = null;
+        this.size = 0;
+    }
+
+    // 맨 앞에 삽입
+    public void insertFirst(int data) {
         ListNode newNode = new ListNode(data);
 
         if (head == null) {
             head = newNode;
             newNode.next = head; // 자기 자신을 가리킴
         } else {
-            ListNode current = head;
-            while (current.next != head) {
-                current = current.next;
-            }
-            current.next = newNode;
+            // 마지막 노드를 찾아서 연결 업데이트
+            ListNode last = getLastNode();
+            newNode.next = head;
+            last.next = newNode;
+            head = newNode;
+        }
+        size++;
+    }
+
+    // 맨 뒤에 삽입
+    public void insertLast(int data) {
+        ListNode newNode = new ListNode(data);
+
+        if (head == null) {
+            head = newNode;
+            newNode.next = head;
+        } else {
+            ListNode last = getLastNode();
+            last.next = newNode;
             newNode.next = head;
         }
+        size++;
+    }
+
+    // 특정 위치에 삽입
+    public void insertAt(int index, int data) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        if (index == 0) {
+            insertFirst(data);
+            return;
+        }
+
+        ListNode newNode = new ListNode(data);
+        ListNode current = head;
+
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+        }
+
+        newNode.next = current.next;
+        current.next = newNode;
+        size++;
+    }
+
+    // 값으로 삭제
+    public boolean delete(int data) {
+        if (head == null) return false;
+
+        // 노드가 하나뿐인 경우
+        if (size == 1 && head.data == data) {
+            head = null;
+            size--;
+            return true;
+        }
+
+        // head 노드를 삭제하는 경우
+        if (head.data == data) {
+            ListNode last = getLastNode();
+            head = head.next;
+            last.next = head;
+            size--;
+            return true;
+        }
+
+        // 다른 노드를 삭제하는 경우
+        ListNode current = head;
+        do {
+            if (current.next.data == data) {
+                current.next = current.next.next;
+                size--;
+                return true;
+            }
+            current = current.next;
+        } while (current != head);
+
+        return false;
+    }
+
+    // 인덱스로 삭제
+    public boolean deleteAt(int index) {
+        if (index < 0 || index >= size) {
+            return false;
+        }
+
+        if (index == 0) {
+            if (size == 1) {
+                head = null;
+            } else {
+                ListNode last = getLastNode();
+                head = head.next;
+                last.next = head;
+            }
+            size--;
+            return true;
+        }
+
+        ListNode current = head;
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+        }
+        current.next = current.next.next;
+        size--;
+        return true;
+    }
+
+    // 탐색
+    public ListNode search(int data) {
+        if (head == null) return null;
+
+        ListNode current = head;
+        do {
+            if (current.data == data) {
+                return current;
+            }
+            current = current.next;
+        } while (current != head);
+
+        return null;
+    }
+
+    // 특정 인덱스의 값 반환
+    public int get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        ListNode current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.data;
+    }
+
+    // 마지막 노드 반환 (내부 메서드)
+    private ListNode getLastNode() {
+        if (head == null) return null;
+
+        ListNode current = head;
+        while (current.next != head) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    // 크기 반환
+    public int size() {
+        return size;
+    }
+
+    // 비어있는지 확인
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    // 출력 (무한 루프 방지)
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+
+        ListNode current = head;
+        do {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        } while (current != head);
+        System.out.println("(back to " + head.data + ")");
+    }
+
+    // n번 순회하며 출력
+    public void displayNTimes(int n) {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+
+        ListNode current = head;
+        for (int i = 0; i < n; i++) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("...");
     }
 }
 ```
+
+#### 장단점
+
+**장점:**
+
+- 모든 노드에서 모든 다른 노드 접근 가능
+- 라운드 로빈 스케줄링에 적합
+- 큐와 스택을 하나의 구조로 구현 가능
+- NULL 포인터 처리 불필요
+
+**단점:**
+
+- 무한 루프 위험 (종료 조건 관리 중요)
+- 구현이 복잡
+- 디버깅이 어려움
+- 메모리 누수 위험 (순환 참조)
 
 ### 배열 vs 연결 리스트 비교
 
@@ -211,6 +715,17 @@ class CircularLinkedList {
 | 삽입/삭제       | O(n)          | O(1)              |
 | 메모리 오버헤드 | 없음          | 포인터 저장 공간  |
 | 캐시 효율성     | 좋음          | 나쁨              |
+
+### 연결 리스트 종류별 비교표
+
+| 특성               | 단일 연결 리스트     | 이중 연결 리스트 | 원형 연결 리스트          |
+| ------------------ | -------------------- | ---------------- | ------------------------- |
+| **포인터 수**      | 1개 (next)           | 2개 (next, prev) | 1개 (next, 마지막→첫번째) |
+| **순회 방향**      | 단방향               | 양방향           | 단방향 (순환)             |
+| **메모리 사용**    | 적음                 | 많음             | 적음                      |
+| **구현 복잡도**    | 낮음                 | 높음             | 중간                      |
+| **역방향 접근**    | 불가능               | 가능             | 불가능 (전체 순회 필요)   |
+| **양끝 삽입/삭제** | head O(1), tail O(n) | 양쪽 모두 O(1)   | head O(1), tail O(n)      |
 
 ## 3. 스택 (Stack)
 
@@ -262,6 +777,14 @@ class ArrayStack {
     public boolean isEmpty() {
         return top == -1;
     }
+
+    public boolean isFull() {
+        return top == maxSize - 1;
+    }
+
+    public int size() {
+        return top + 1;
+    }
 }
 ```
 
@@ -270,11 +793,18 @@ class ArrayStack {
 ```java
 class LinkedStack {
     private ListNode top;
+    private int size;
+
+    public LinkedStack() {
+        this.top = null;
+        this.size = 0;
+    }
 
     public void push(int data) {
         ListNode newNode = new ListNode(data);
         newNode.next = top;
         top = newNode;
+        size++;
     }
 
     public int pop() {
@@ -283,6 +813,7 @@ class LinkedStack {
         }
         int data = top.data;
         top = top.next;
+        size--;
         return data;
     }
 
@@ -295,6 +826,10 @@ class LinkedStack {
 
     public boolean isEmpty() {
         return top == null;
+    }
+
+    public int size() {
+        return size;
     }
 }
 ```
@@ -405,6 +940,14 @@ class LinearQueue {
         }
         return queue[front++];
     }
+
+    public boolean isEmpty() {
+        return front == -1 || front > rear;
+    }
+
+    public boolean isFull() {
+        return rear == maxSize - 1;
+    }
 }
 ```
 
@@ -449,6 +992,10 @@ class CircularQueue {
 
     public boolean isFull() {
         return size == maxSize;
+    }
+
+    public int size() {
+        return size;
     }
 }
 ```
@@ -510,6 +1057,75 @@ int top = deque.pop();  // removeFirst와 동일
 // 큐처럼 사용
 deque.offer(6);   // addLast와 동일
 int head = deque.poll(); // removeFirst와 동일
+```
+
+### 연결 리스트 기반 큐 구현
+
+```java
+class LinkedQueue {
+    private ListNode front;
+    private ListNode rear;
+    private int size;
+
+    public LinkedQueue() {
+        this.front = null;
+        this.rear = null;
+        this.size = 0;
+    }
+
+    public void enqueue(int data) {
+        ListNode newNode = new ListNode(data);
+
+        if (rear == null) {
+            front = rear = newNode;
+        } else {
+            rear.next = newNode;
+            rear = newNode;
+        }
+        size++;
+    }
+
+    public int dequeue() {
+        if (front == null) {
+            throw new RuntimeException("Queue is Empty");
+        }
+
+        int data = front.data;
+        front = front.next;
+
+        if (front == null) {
+            rear = null;
+        }
+
+        size--;
+        return data;
+    }
+
+    public int peek() {
+        if (front == null) {
+            throw new RuntimeException("Queue is Empty");
+        }
+        return front.data;
+    }
+
+    public boolean isEmpty() {
+        return front == null;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public void display() {
+        ListNode current = front;
+        System.out.print("Front -> ");
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("Rear");
+    }
+}
 ```
 
 ---
@@ -636,3 +1252,164 @@ Deque<Integer> stack = new ArrayDeque<>();
 stack.push(1);
 int top = stack.pop();
 ```
+
+## Q11. 원형 연결 리스트에서 무한 루프를 방지하는 방법은?
+
+**A:**
+원형 연결 리스트에서는 NULL 포인터가 없으므로 종료 조건을 명확히 설정해야 합니다:
+
+```java
+// ❌ 무한 루프 위험
+public void printAll() {
+    ListNode current = head;
+    while (current != null) { // null이 없으므로 무한 루프!
+        System.out.println(current.data);
+        current = current.next;
+    }
+}
+
+// ✅ 올바른 구현
+public void printAll() {
+    if (head == null) return;
+
+    ListNode current = head;
+    do {
+        System.out.println(current.data);
+        current = current.next;
+    } while (current != head); // head로 돌아올 때까지
+}
+```
+
+## Q12. 언제 단일/이중/원형 연결 리스트를 각각 사용해야 하나요?
+
+**A:**
+
+**단일 연결 리스트:**
+
+- 메모리 사용량을 최소화하고 싶을 때
+- 스택이나 간단한 큐 구현
+- 단순한 순차 처리만 필요할 때
+
+**이중 연결 리스트:**
+
+- 양방향 순회가 자주 필요할 때 (브라우저 히스토리)
+- 임의 위치에서의 삭제가 빈번할 때
+- 덱(Deque) 기능이 필요할 때
+
+**원형 연결 리스트:**
+
+- 라운드 로빈 알고리즘 구현
+- 게임에서 플레이어 턴 관리
+- 순환적인 처리가 필요할 때
+
+## Q13. 스택과 큐를 서로 이용해서 구현할 수 있나요?
+
+**A:**
+네, 가능합니다.
+
+**스택 2개로 큐 구현:**
+
+```java
+class QueueUsingStacks {
+    private Stack<Integer> input = new Stack<>();
+    private Stack<Integer> output = new Stack<>();
+
+    public void enqueue(int x) {
+        input.push(x);
+    }
+
+    public int dequeue() {
+        if (output.isEmpty()) {
+            while (!input.isEmpty()) {
+                output.push(input.pop());
+            }
+        }
+        return output.pop();
+    }
+}
+```
+
+**큐 2개로 스택 구현:**
+
+```java
+class StackUsingQueues {
+    private Queue<Integer> q1 = new LinkedList<>();
+    private Queue<Integer> q2 = new LinkedList<>();
+
+    public void push(int x) {
+        q2.offer(x);
+        while (!q1.isEmpty()) {
+            q2.offer(q1.poll());
+        }
+        Queue<Integer> temp = q1;
+        q1 = q2;
+        q2 = temp;
+    }
+
+    public int pop() {
+        return q1.poll();
+    }
+}
+```
+
+## Q14. 메모리 누수를 방지하는 방법은?
+
+**A:**
+연결 리스트에서 노드 삭제 시 참조를 명시적으로 해제해야 합니다:
+
+```java
+// 이중 연결 리스트 노드 삭제 시
+public void deleteNode(DoublyListNode node) {
+    // 연결 해제
+    if (node.prev != null) node.prev.next = node.next;
+    if (node.next != null) node.next.prev = node.prev;
+
+    // 메모리 누수 방지를 위한 참조 해제
+    node.prev = null;
+    node.next = null;
+}
+```
+
+특히 원형 연결 리스트에서는 순환 참조로 인한 메모리 누수에 주의해야 합니다.
+
+## Q15. 동적 배열의 크기 확장 전략을 설명해주세요.
+
+**A:**
+동적 배열은 용량이 부족할 때 다음과 같은 전략을 사용합니다:
+
+1. **확장 비율**: 보통 1.5배 또는 2배로 확장
+
+   - ArrayList: 1.5배 (더 메모리 효율적)
+   - Vector: 2배 (더 빠른 확장)
+
+2. **Amortized 분석**: 개별 삽입은 O(n)이지만, n번의 삽입에 대한 평균은 O(1)
+
+3. **확장 과정**:
+   ```java
+   // 새로운 배열 할당 (더 큰 크기)
+   int[] newArray = new int[oldSize * 1.5];
+   // 기존 데이터 복사
+   System.arraycopy(oldArray, 0, newArray, 0, oldSize);
+   // 참조 업데이트
+   array = newArray;
+   ```
+
+이러한 전략으로 효율적인 동적 크기 관리가 가능합니다.
+
+---
+
+# 시간 복잡도 요약표
+
+| 자료구조            | 접근 | 탐색 | 삽입     | 삭제     | 공간복잡도 |
+| ------------------- | ---- | ---- | -------- | -------- | ---------- |
+| **배열**            | O(1) | O(n) | O(n)     | O(n)     | O(n)       |
+| **동적배열**        | O(1) | O(n) | O(1)\*   | O(n)     | O(n)       |
+| **단일 연결리스트** | O(n) | O(n) | O(1)\*\* | O(1)\*\* | O(n)       |
+| **이중 연결리스트** | O(n) | O(n) | O(1)\*\* | O(1)\*\* | O(n)       |
+| **스택**            | O(n) | O(n) | O(1)     | O(1)     | O(n)       |
+| **큐**              | O(n) | O(n) | O(1)     | O(1)     | O(n)       |
+
+\* Amortized (평균적으로)  
+\*\* 위치를 알고 있을 때
+
+---
