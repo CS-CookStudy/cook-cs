@@ -1147,24 +1147,12 @@ class LinkedQueue {
 **A:**
 크기 확장 시에는 O(n) 시간이 걸립니다. 새로운 메모리를 할당하고 기존 데이터를 모두 복사해야 하기 때문입니다. 하지만 확장 빈도가 낮기 때문에 평균적으로(amortized) O(1)의 삽입 시간을 가집니다. ArrayList는 보통 1.5배로 확장합니다.
 
-## Q3. 스택 오버플로우가 발생하는 이유는?
-
-**A:**
-함수가 재귀적으로 너무 많이 호출되거나 지역 변수가 과도하게 선언될 때, 제한된 스택 메모리 공간을 초과하여 발생합니다. 특히 무한 재귀나 깊은 재귀 호출이 주된 원인입니다.
-
-```java
-// 스택 오버플로우 예시
-public int factorial(int n) {
-    return n * factorial(n - 1); // 종료 조건 없음
-}
-```
-
-## Q4. 원형 큐를 사용하는 이유는?
+## Q3. 원형 큐를 사용하는 이유는?
 
 **A:**
 선형 큐에서는 dequeue 연산 후 front가 이동하면서 앞쪽 공간이 낭비되는 문제가 있습니다. 원형 큐는 배열의 끝과 시작을 연결하여 공간을 효율적으로 재사용할 수 있습니다. 모듈로 연산 `(index + 1) % size`을 사용하여 인덱스를 순환시킵니다.
 
-## Q5. 스택과 큐의 실제 사용 사례를 설명해주세요.
+## Q4. 스택과 큐의 실제 사용 사례를 설명해주세요.
 
 **A:**
 **스택:**
@@ -1183,12 +1171,12 @@ public int factorial(int n) {
 - 네트워크 패킷 버퍼링
 - 캐시 구현 (LRU)
 
-## Q6. 배열의 캐시 효율성이 좋은 이유는?
+## Q5. 배열의 캐시 효율성이 좋은 이유는?
 
 **A:**
 배열은 메모리에 연속적으로 저장되어 있어 공간 지역성(spatial locality)이 좋습니다. CPU가 한 번에 여러 요소를 캐시로 가져올 수 있어, 인접한 데이터에 접근할 때 캐시 히트율이 높아집니다. 반면 연결리스트는 노드들이 메모리에 흩어져 있어 캐시 미스가 빈번하게 발생합니다.
 
-## Q7. 이중 연결리스트의 장단점은?
+## Q6. 이중 연결리스트의 장단점은?
 
 **A:**
 **장점:**
@@ -1203,7 +1191,7 @@ public int factorial(int n) {
 - 구현 복잡도 증가
 - 포인터 관리 부담 증가
 
-## Q8. 우선순위 큐를 배열로 구현할 때와 힙으로 구현할 때의 차이는?
+## Q7. 우선순위 큐를 배열로 구현할 때와 힙으로 구현할 때의 차이는?
 
 **A:**
 **배열 구현:**
@@ -1218,7 +1206,7 @@ public int factorial(int n) {
 
 대용량 데이터에서는 힙 구현이 더 효율적입니다. Java의 PriorityQueue는 힙으로 구현되어 있습니다.
 
-## Q9. ArrayList와 LinkedList의 성능 차이는?
+## Q8. ArrayList와 LinkedList의 성능 차이는?
 
 **A:**
 
@@ -1238,7 +1226,7 @@ public int factorial(int n) {
 
 빈번한 인덱스 접근이 필요하면 ArrayList, 빈번한 삽입/삭제가 필요하면 LinkedList를 사용합니다.
 
-## Q10. Java의 Stack 클래스 대신 Deque를 권장하는 이유는?
+## Q9. Java의 Stack 클래스 대신 Deque를 권장하는 이유는?
 
 **A:**
 Java의 Stack 클래스는 Vector를 상속받아 동기화 오버헤드가 있고, LIFO가 아닌 다른 방법으로도 접근할 수 있어 진정한 스택이 아닙니다. ArrayDeque는 더 빠르고 메모리 효율적이며, 스택과 큐 기능을 모두 제공합니다.
@@ -1253,7 +1241,7 @@ stack.push(1);
 int top = stack.pop();
 ```
 
-## Q11. 원형 연결 리스트에서 무한 루프를 방지하는 방법은?
+## Q10. 원형 연결 리스트에서 무한 루프를 방지하는 방법은?
 
 **A:**
 원형 연결 리스트에서는 NULL 포인터가 없으므로 종료 조건을 명확히 설정해야 합니다:
@@ -1280,7 +1268,7 @@ public void printAll() {
 }
 ```
 
-## Q12. 언제 단일/이중/원형 연결 리스트를 각각 사용해야 하나요?
+## Q11. 언제 단일/이중/원형 연결 리스트를 각각 사용해야 하나요?
 
 **A:**
 
@@ -1302,57 +1290,7 @@ public void printAll() {
 - 게임에서 플레이어 턴 관리
 - 순환적인 처리가 필요할 때
 
-## Q13. 스택과 큐를 서로 이용해서 구현할 수 있나요?
-
-**A:**
-네, 가능합니다.
-
-**스택 2개로 큐 구현:**
-
-```java
-class QueueUsingStacks {
-    private Stack<Integer> input = new Stack<>();
-    private Stack<Integer> output = new Stack<>();
-
-    public void enqueue(int x) {
-        input.push(x);
-    }
-
-    public int dequeue() {
-        if (output.isEmpty()) {
-            while (!input.isEmpty()) {
-                output.push(input.pop());
-            }
-        }
-        return output.pop();
-    }
-}
-```
-
-**큐 2개로 스택 구현:**
-
-```java
-class StackUsingQueues {
-    private Queue<Integer> q1 = new LinkedList<>();
-    private Queue<Integer> q2 = new LinkedList<>();
-
-    public void push(int x) {
-        q2.offer(x);
-        while (!q1.isEmpty()) {
-            q2.offer(q1.poll());
-        }
-        Queue<Integer> temp = q1;
-        q1 = q2;
-        q2 = temp;
-    }
-
-    public int pop() {
-        return q1.poll();
-    }
-}
-```
-
-## Q14. 메모리 누수를 방지하는 방법은?
+## Q12. 메모리 누수를 방지하는 방법은?
 
 **A:**
 연결 리스트에서 노드 삭제 시 참조를 명시적으로 해제해야 합니다:
@@ -1371,32 +1309,6 @@ public void deleteNode(DoublyListNode node) {
 ```
 
 특히 원형 연결 리스트에서는 순환 참조로 인한 메모리 누수에 주의해야 합니다.
-
-## Q15. 동적 배열의 크기 확장 전략을 설명해주세요.
-
-**A:**
-동적 배열은 용량이 부족할 때 다음과 같은 전략을 사용합니다:
-
-1. **확장 비율**: 보통 1.5배 또는 2배로 확장
-
-   - ArrayList: 1.5배 (더 메모리 효율적)
-   - Vector: 2배 (더 빠른 확장)
-
-2. **Amortized 분석**: 개별 삽입은 O(n)이지만, n번의 삽입에 대한 평균은 O(1)
-
-3. **확장 과정**:
-   ```java
-   // 새로운 배열 할당 (더 큰 크기)
-   int[] newArray = new int[oldSize * 1.5];
-   // 기존 데이터 복사
-   System.arraycopy(oldArray, 0, newArray, 0, oldSize);
-   // 참조 업데이트
-   array = newArray;
-   ```
-
-이러한 전략으로 효율적인 동적 크기 관리가 가능합니다.
-
----
 
 # 시간 복잡도 요약표
 
