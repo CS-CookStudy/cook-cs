@@ -21,34 +21,34 @@ CS 스터디 시작 (2025.06.16 ~ )
 
 - [1. 컴퓨터 시스템 기초]()
   - [1.1 컴퓨터 구조](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture)
-- [컴퓨터의 요소](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.1%20Computer%20Element.md)
-- [레지스터,ALU,제어 유닛](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.2%20CPU%20Element.md)
-- [캐시 메모리와 메모리 계층구조](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.3%20Cache%20Memory%20and%20Memory%20Hierachy.md)
-- [폰노이만 구조 vs 하버드 구조](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.4%20Computer%20Structure.md)
-- [명령어 실행 과정(Fetch-Decode-Execute)](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.5%20command%20execution%20process.md)
-- [입출력 시스템과 버스](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.6%20Input%20Output%20systems%20and%20buses.md)
-  - [1.2 운영체제 기본 개념]()
-    - [운영체제의 역할과 기능]()
-    - [커널과 시스템 콜]()
-    - [프로세스와 스레드]()
-      - [프로세스 생명주기]()
-      - [컨텍스트 스위칭]()
-      - [멀티프로세싱 vs 멀티스레딩]()
-    - [CPU 스케줄링]()
-      - [FCFS, SJF, RR, Priority 스케줄링]()
-      - [선점형 vs 비선점형]()
-    - [메모리 관리]()
-      - [물리/가상 메모리]()
-      - [페이징과 세그멘테이션]()
-      - [메모리 할당 방식]()
-    - [동기화와 상호배제]()
-      - [경쟁 상태(Race Condition)]()
-      - [뮤텍스, 세마포어]()
-      - [데드락과 해결 방법]()
-    - [파일 시스템]()
-      - [파일과 디렉토리 구조]()
-      - [파일 할당 방법]()
-      - [저널링 파일 시스템]()
+    - [컴퓨터의 요소](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.1%20Computer%20Element.md)
+    - [레지스터,ALU,제어 유닛](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.2%20CPU%20Element.md)
+    - [캐시 메모리와 메모리 계층구조](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.3%20Cache%20Memory%20and%20Memory%20Hierachy.md)
+    - [폰노이만 구조 vs 하버드 구조](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.4%20Computer%20Structure.md)
+    - [명령어 실행 과정(Fetch-Decode-Execute)](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.5%20command%20execution%20process.md)
+    - [입출력 시스템과 버스](01.%20Computer%20System%20Fundamentals/1.1%20Computer%20Architecture/1.1.6%20Input%20Output%20systems%20and%20buses.md)
+  - [1.2 운영체제 기본 개념](/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics)
+    - [운영체제의 역할과 기능](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.1%20Roles%20and%20functions%20of%20the%20operating%20system.md)
+    - [커널과 시스템 콜](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.2%20Kernel%20and%20System%20Call.md)
+    - [프로세스와 스레드](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.3%20Processes%20and%20Threads.md)
+      - 프로세스 생명주기
+      - 컨텍스트 스위칭
+      - 멀티프로세싱 vs 멀티스레딩
+    - [CPU 스케줄링](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.4%20CPU%20Scheduling.md)
+      - FCFS, SJF, RR, Priority 스케줄링
+      - 선점형 vs 비선점형
+    - [메모리 관리](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.5%20Memory%20Management.md)
+      - 물리/가상 메모리
+      - 페이징과 세그멘테이션
+      - 메모리 할당 방식
+    - [동기화와 상호배제](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.6%20Process%20Synchronization%20and%20Mutual%20Exclusion.md)
+      - 경쟁 상태(Race Condition)
+      - 뮤텍스, 세마포어, 모니터
+      - 데드락과 해결 방법
+    - [파일 시스템](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.7%20File%20System.md)
+      - 파일과 디렉토리 구조
+      - 파일 할당 방법
+      - 저널링 파일 시스템
   - [1.3 시스템 성능과 최적화](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/README.md)
     - [병목 현상](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.3%20System%20Performance%20and%20Optimization/1.3.1%20Bottleneck.md)
     - [성능 측정 지표(처리량,응답시간,지연시간)](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.3%20System%20Performance%20and%20Optimization/1.3.2%20Evaluation%20Metric.md)
