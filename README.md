@@ -31,24 +31,26 @@ CS 스터디 시작 (2025.06.16 ~ )
     - [운영체제의 역할과 기능](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.1%20Roles%20and%20functions%20of%20the%20operating%20system.md)
     - [커널과 시스템 콜](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.2%20Kernel%20and%20System%20Call.md)
     - [프로세스와 스레드](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.3%20Processes%20and%20Threads.md)
-      - 프로세스 생명주기
-      - 컨텍스트 스위칭
-      - 멀티프로세싱 vs 멀티스레딩
+      - [프로세스](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.3%20Processes%20and%20Threads.md#1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4process%EB%9E%80)
+      - [스레드](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.3%20Processes%20and%20Threads.md#5-%EC%8A%A4%EB%A0%88%EB%93%9Cthread%EB%9E%80)
+      - [멀티프로세싱 vs 멀티스레딩](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.3%20Processes%20and%20Threads.md#9-%EB%A9%80%ED%8B%B0%ED%94%84%EB%A1%9C%EC%84%B8%EC%8B%B1-vs-%EB%A9%80%ED%8B%B0%EC%8A%A4%EB%A0%88%EB%94%A9)
+      - [컨텍스트 스위칭](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.3%20Processes%20and%20Threads.md#10-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%8A%A4%EC%9C%84%EC%B9%AD)
     - [CPU 스케줄링](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.4%20CPU%20Scheduling.md)
-      - FCFS, SJF, RR, Priority 스케줄링
-      - 선점형 vs 비선점형
+      - [FCFS, SJF, RR, Priority 스케줄링](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.4%20CPU%20Scheduling.md#1-cpu-%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81%EC%9D%B4%EB%9E%80)
+      - [선점형 vs 비선점형](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.4%20CPU%20Scheduling.md#2-%EC%84%A0%EC%A0%90%ED%98%95-vs-%EB%B9%84%EC%84%A0%EC%A0%90%ED%98%95)
     - [메모리 관리](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.5%20Memory%20Management.md)
-      - 물리/가상 메모리
-      - 페이징과 세그멘테이션
-      - 메모리 할당 방식
+      - [물리/가상 메모리](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.5%20Memory%20Management.md#2-%EB%AC%BC%EB%A6%AC-%EB%A9%94%EB%AA%A8%EB%A6%AC-vs-%EA%B0%80%EC%83%81-%EB%A9%94%EB%AA%A8%EB%A6%AC)
+      - [페이지 교체 알고리즘](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.5%20Memory%20Management.md#6-%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%90%EC%B2%B4-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
+      - [메모리 할당 방식](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.5%20Memory%20Management.md#7-%EB%A9%94%EB%AA%A8%EB%A6%AC-%ED%95%A0%EB%8B%B9-%EB%B0%A9%EC%8B%9D)
+      - [페이징과 세그멘테이션](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.5%20Memory%20Management.md#1%EF%B8%8F%E2%83%A3-%ED%8E%98%EC%9D%B4%EC%A7%95paging)
     - [동기화와 상호배제](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.6%20Process%20Synchronization%20and%20Mutual%20Exclusion.md)
-      - 경쟁 상태(Race Condition)
-      - 뮤텍스, 세마포어, 모니터
-      - 데드락과 해결 방법
+      - [경쟁 상태(Race Condition)](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.6%20Process%20Synchronization%20and%20Mutual%20Exclusion.md#1-%EA%B2%BD%EC%9F%81-%EC%83%81%ED%83%9Crace-condition)
+      - [뮤텍스, 세마포어, 모니터](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.6%20Process%20Synchronization%20and%20Mutual%20Exclusion.md#3-%EB%AE%A4%ED%85%8D%EC%8A%A4mutex-%EC%84%B8%EB%A7%88%ED%8F%AC%EC%96%B4semaphore-%EB%AA%A8%EB%8B%88%ED%84%B0)
+      - [데드락과 해결 방법](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.6%20Process%20Synchronization%20and%20Mutual%20Exclusion.md#4-%EB%8D%B0%EB%93%9C%EB%9D%BDdeadlock-%EA%B5%90%EC%B0%A9%EC%83%81%ED%83%9C)
     - [파일 시스템](./01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.7%20File%20System.md)
-      - 파일과 디렉토리 구조
-      - 파일 할당 방법
-      - 저널링 파일 시스템
+      - [파일과 디렉토리 구조](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.7%20File%20System.md#1-%ED%8C%8C%EC%9D%BC%EA%B3%BC-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0)
+      - [파일 할당 방법](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.7%20File%20System.md#2-%ED%8C%8C%EC%9D%BC-%ED%95%A0%EB%8B%B9-%EB%B0%A9%EC%8B%9D)
+      - [저널링 파일 시스템](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.2%20Operating%20System%20Basics/1.2.7%20File%20System.md#3-%EC%A0%80%EB%84%90%EB%A7%81-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9C)
   - [1.3 시스템 성능과 최적화](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/README.md)
     - [병목 현상](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.3%20System%20Performance%20and%20Optimization/1.3.1%20Bottleneck.md)
     - [성능 측정 지표(처리량,응답시간,지연시간)](https://github.com/CS-CookStudy/cook-cs/blob/main/01.%20Computer%20System%20Fundamentals/1.3%20System%20Performance%20and%20Optimization/1.3.2%20Evaluation%20Metric.md)
