@@ -17,6 +17,51 @@
 
 > 문자열 탐색을 건너 뛸 수 있다면, 건너 뛴 후의 부분이 동일해야함
 
-![img.png](../images/kmp_exa2.png)
+![img.png](../images/kmp_exa3.png)
+- N: 텍스트, H: 패턴
+- 회색 부분 : 현재 텍스트와 패턴이 matched 길이만큼 일치한 상태
+- 패턴 내부의 H[0..matched-1] 구간에서 "접두사 == 접미사"인 가장 긴 부분의 길이 k를 미리 구해둔 pi 배열을 통해 알고 있음
+- 패턴을 matched - k칸만큼 이동 후 재 확인
 
-1. 다음 시작 위치를 찾기
+## 3.1 pi[]
+- 부분 일치 테이블 (partial match table)이라고 하며, N이 어디까지 일치했는지, 다음 시작위치가 어디인지를 말해주는 값
+
+## 4. 구현
+```C++
+vector<int> kmpSearch(const string& H, const string& N)
+{
+    int n = H.size(), m = N.size()
+    vector<int> ret;
+    //pi[i]=N[..i]의 접미사도 되고 접두사도 되는 문자열의 최대 길이
+    vector<int> pi = getPartialMatch(N);
+    
+    // begin= matched=0에서부터 시작하자.
+    int begin = 0, matched = 0;
+        while(begin < n - m) i {
+            // 만약 H의 부분가 N의 해당 글자와 같다면
+            if (matched < m && H[begin + matched] = N[matched]) {
+                ++matched;
+                // 결과적으로 m글자가 모두 일치했다면 답에 추가한다.
+                if (matched = m) ret.push_back(begin) ;
+            }
+            else 
+            {
+            1/ 예외: matched가 0인 경우에는 다음 칸에서부터 계속
+            if (matched = 0)
+                ++begin;
+            else 
+            {
+            begin += matched - pi[matched-1];
+            // begin을 옮겼다고 처음부터 다시 비교할 필요가 없다.
+            // 옮긴 후에도 pilmatched- 1만큼은 항상 일치하기 때문이다.
+            matched = pi [matched-1];
+            }
+        }
+    }
+    return ret;        
+}
+```
+
+## 5. 시간복잡도
+- while문은 if문 분기 결과에 따라 다른 동작을 하기 때문에 수행시간 분석 어려움
+- 반복문 전체 수행 횟수 O(|H|)
