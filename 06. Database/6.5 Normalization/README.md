@@ -1,0 +1,5 @@
+  - [6.5 정규화(Normalization)]()
+    - [함수적 종속성]()
+    - [제1정규형 ~ 제5정규형]()
+    - [BCNF(Boyce-Codd Normal Form)]()
+    - [정규화의 장단점과 역정규화]()
