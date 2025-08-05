@@ -1,4 +1,4 @@
-  - [5.7 분할 정복(Divide and Conquer)]()
-    - [분할 정복의 원리]()
-    - [마스터 정리(Master Theorem)]()
-    - [대표 알고리즘들(병합 정렬, 퀵 정렬, 거듭제곱)]()
+  - [5.5 분할 정복(Divide and Conquer)](https://github.com/CS-CookStudy/cook-cs/blob/62172bbf61417f949a6c980ae8f7615079c7fddd/05.%20Algorithms/5.5%20Divide%20and%20Conquer)
+    - [분할 정복의 원리](https://github.com/CS-CookStudy/cook-cs/blob/62172bbf61417f949a6c980ae8f7615079c7fddd/05.%20Algorithms/5.5%20Divide%20and%20Conquer/5.5.1%20Principle%20of%20Divide%20and%20Conquer.md)
+    - [마스터 정리(Master Theorem)](https://github.com/CS-CookStudy/cook-cs/blob/d23431f9578e091f8637b26fcf7f62cb73265d8b/05.%20Algorithms/5.5%20Divide%20and%20Conquer/5.5.2%20Master%20Theorem.md)
+    - [대표 알고리즘들(병합 정렬, 퀵 정렬, 거듭제곱)](https://github.com/CS-CookStudy/cook-cs/blob/d23431f9578e091f8637b26fcf7f62cb73265d8b/05.%20Algorithms/5.5%20Divide%20and%20Conquer/5.5.3%20Classic%20Algorithms%20(Merge%20Sort,%20Quick%20Sort,%20Exponentiation).md)
